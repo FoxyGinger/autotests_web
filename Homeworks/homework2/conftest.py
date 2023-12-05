@@ -43,3 +43,21 @@ def login_success_xpath():
     return """//*[@id="app"]/main/div/div[1]/h1"""
 
 
+@pytest.fixture()
+def new_post_button_xpath():
+    return """//*[@id="create-btn"]"""
+
+
+@pytest.fixture()
+def new_post_title_input_xpath():
+    return """//*[@id="create-item"]/div/div/div[1]/div/label/input"""
+
+
+@pytest.fixture()
+def new_post_save_button_xpath():
+    return """//*[@id="create-item"]/div/div/div[7]/div/button"""
+
+
+@pytest.fixture()
+def new_post_title_xpath():
+    return """//*[@id="app"]/main/div/div[1]/h1"""
