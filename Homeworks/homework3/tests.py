@@ -42,3 +42,31 @@ def test_step3(test_page, test_data):
     time.sleep(1)
     assert test_page.get_post_title() == new_post_title_expected
 
+
+def test_step4(test_page, test_data):
+    logging.info("Test 4 Starting")
+    test_page.go_to_site()
+
+    # 1 login
+    logging.info("1. Login")
+    test_page.enter_login(test_data["login"])
+    test_page.enter_pass(test_data["password"])
+    test_page.click_login_button()
+    assert test_page.get_text_blog() == "Blog"
+
+    # 2 Contact
+    logging.info("2. Contact")
+    test_page.click_contact_button()
+    time.sleep(1)
+
+    # 3 Fill form
+    logging.info("3. Fill form")
+    test_page.enter_contact_name("Tester")
+    test_page.enter_contact_email("some_email@test.com")
+    test_page.enter_contact_content("some text")
+    test_page.click_contact_contact_us_button()
+    time.sleep(1)
+
+    # 4 Check alert
+    logging.info("4. Check alert")
+    assert test_page.get_alert_text() == "Form successfully submitted"
