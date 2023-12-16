@@ -43,7 +43,7 @@ def test_step3(test_page, test_data):
     assert test_page.get_post_title() == new_post_title_expected
 
 
-def test_step4(test_page, test_data):
+def test_step4(test_page, test_data, email_report):
     logging.info("Test 4 Starting")
     test_page.go_to_site()
 

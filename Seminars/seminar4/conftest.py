@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
 from testpage import OperationsHelper
+from email_report import send_email
 
 
 @pytest.fixture(scope="session")
@@ -33,3 +34,8 @@ def browser(test_data):
 def test_page(browser, test_data):
     yield OperationsHelper(browser, test_data.get('address'))
 
+
+@pytest.fixture(scope="session")
+def email_report():
+    yield
+    send_email()
