@@ -1,4 +1,7 @@
+import logging
+
 import pytest
+import requests
 import yaml
 
 from selenium import webdriver
@@ -39,3 +42,19 @@ def test_page(browser, test_data):
 def email_report():
     yield
     send_email()
+
+
+@pytest.fixture(scope="session")
+def token(test_data):
+    logging.debug('Отправка запроса для токена')
+    try:
+        response = requests.post(url=f"{test_data['address']}/{test_data['login_path']}", data={"username": test_data['login'], "password": test_data['password']})
+    except:
+        logging.exception(f'Exception while get token')
+        return None
+
+    if response.status_code != 200:
+        logging.error(f"Can't get token: {response.text}")
+        return None
+
+    return response.json()['token']
